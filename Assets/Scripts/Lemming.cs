@@ -19,6 +19,8 @@ public class Lemming : MonoBehaviour
         _lastUsedGameObject = gameObject;
         _isInit = true;
         enabled = true;
+
+        //Maybe start a coroutine here to make it possible to use the same collider after x seconds again.
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -37,7 +39,7 @@ public class Lemming : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //Might want to do this with a "Lemming Manager" instead, as each fixed update per game object may be to much for a mobile plattform to handle
+        //Might want to do this with a "Lemming Manager" instead, as each fixed update per game object (in large quantities) may be to much for a mobile plattform to handle
         transform.position = Vector3.Lerp(transform.position, transform.position + transform.forward, Time.fixedDeltaTime);
     }
 }

@@ -7,7 +7,6 @@ namespace HypercubesPrototyp.HyperCubeLogic
     [CreateAssetMenu(menuName = "CubeLogic/SplitCube")]
     public class SplitCube : CubeLogic
     {
-        //TODO Get this from the lemming class as it can change depending on the lemming (Could be done in factory)
         [SerializeField] private SplitType _splitType;
 
         private enum SplitType

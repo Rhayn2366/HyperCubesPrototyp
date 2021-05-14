@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d10dacae04491784caff828d60e11f36, type: 3}
-  m_Name: 90Degrees
+  m_Name: -90Degrees
   m_EditorClassIdentifier: 
-  _rotationAngle: 90
+  _rotationAngle: -90

@@ -10,8 +10,6 @@ namespace HypercubesPrototyp.HyperCubeLogic
         [SerializeField] private int _lemmingID;
         [SerializeField] private Color _lemmingColor;
 
-        //TODO Get this from the lemming class as it can change depending on the lemming (Could be done in factory)
-
 #nullable enable
         public override void DoCommand(Lemming? lemming, HyperCube hyperCube)
         {

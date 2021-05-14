@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3953010713143572670}
   - component: {fileID: 7706300459465731250}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TriggerHyperCube
   m_TagString: Untagged
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
@@ -44,3 +44,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CubeLogic: {fileID: 0}
+  _isUIStartTrigger: 0

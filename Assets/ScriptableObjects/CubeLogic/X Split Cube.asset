@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: X Split Cube
   m_EditorClassIdentifier: 
   _yOffset: 0.25
-  _splitType: 1
+  _splitType: 2

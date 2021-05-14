@@ -1,18 +1,34 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 /// <summary>
 /// This class describes all game objects, that can move around and trigger hyper cubes with a collision.
 /// </summary>
-[RequireComponent(typeof(Rigidbody), typeof(Collider))]
+[RequireComponent(typeof(Collider))]
 public class Lemming : MonoBehaviour
 {
-    [SerializeField] private GameObject _lemmingPrefab;
-
-    public GameObject GetLemmingPrefab() => _lemmingPrefab;
+    [SerializeField] private int _lemmingId;
 
     private GameObject _lastUsedGameObject;
 
     private bool _isInit;
+
+    private LemmingManager _lemmingManager;
+
+    private void OnEnable()
+    {
+        _lemmingManager = LemmingManager.Instance;
+    }
+
+    public void SetRotationOnY(float degrees)
+    {
+        transform.Rotate(Vector3.up, degrees);
+    }
+
+    public int GetLemmingId()
+    {
+        return _lemmingId;
+    }
 
     public void SetLastUsedGameObject(GameObject gameObject)
     {
@@ -23,13 +39,13 @@ public class Lemming : MonoBehaviour
         //Maybe start a coroutine here to make it possible to use the same collider after x seconds again.
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collider)
     {
         if (!_isInit) return;
         //Prevents using the same collider multiple times!
-        if (collision.gameObject != _lastUsedGameObject)
+        if (collider.gameObject != _lastUsedGameObject)
         {
-            var collisionHyperCube = collision.gameObject.GetComponent<CollisionHyperCube>();
+            var collisionHyperCube = collider.gameObject.GetComponent<CollisionHyperCube>();
             if (collisionHyperCube != null)
             {
                 collisionHyperCube.OnCollisionDetected(gameObject);
@@ -37,9 +53,14 @@ public class Lemming : MonoBehaviour
         } 
     }
 
-    private void FixedUpdate()
+    public void Move()
     {
-        //Might want to do this with a "Lemming Manager" instead, as each fixed update per game object (in large quantities) may be to much for a mobile plattform to handle
+        if (!_isInit) return;
         transform.position = Vector3.Lerp(transform.position, transform.position + transform.forward, Time.fixedDeltaTime);
+    }
+
+    public void OnDestroy()
+    {
+        _lemmingManager.RemoveLemming(this);
     }
 }

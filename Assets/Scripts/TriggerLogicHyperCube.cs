@@ -18,7 +18,7 @@
     {
         if (_triggerLogic > 0)
         {
-            StartCoroutine(CubeLogic.DoCommand(null, this));
+            StartCoroutine(CubeLogic.TriggerCommand(null, this));
             _triggerLogic--;
         }
     }

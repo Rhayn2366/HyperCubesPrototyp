@@ -1,95 +1,91 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 [CreateAssetMenu(menuName = "CubeLogic/SplitCube")]
 public class SplitCube : CubeLogic
 {
+    //maybe get the offset from the prefab, could be done in the factory
     [SerializeField] private float _yOffset = .25f;
     [SerializeField] private SplitType _splitType;
 
     private enum SplitType
     {
         T,
-        X,
-        Y
+        V,
+        X
     }
 
-
-    public override IEnumerator DoCommand(GameObject lemming, HyperCube hyperCube)
+    protected override void DoCommand(GameObject lemming, HyperCube hyperCube)
     {
-        if (!lemming) yield return null;
+        if (!lemming) return;
 
-        var lemmingPrefab = lemming.GetComponent<Lemming>().GetLemmingPrefab();
-        if (!lemmingPrefab) yield return null;
+        var cache = lemming.GetComponent<Lemming>();
+        var lemmingId = cache.GetLemmingId();
 
-        Destroy(lemming.gameObject);
+        Destroy(lemming);
 
         if (_splitType == SplitType.T)
         {
-            TSplit(hyperCube, lemmingPrefab);
+            TSplit(hyperCube, lemmingId);
+        }
+        else if (_splitType == SplitType.V)
+        {
+            VSplit(hyperCube, lemmingId);
         }
         else if (_splitType == SplitType.X)
         {
-            XSplit(hyperCube, lemmingPrefab);
+            XSplit(hyperCube, lemmingId);
         }
-        else if (_splitType == SplitType.Y)
-        {
-            YSplit(hyperCube, lemmingPrefab);
-        }
-        
-
-
-        yield return new WaitForSeconds(1f);
     }
 
-    private void TSplit(HyperCube hyperCube, GameObject lemmingPrefab)
+    private void TSplit(HyperCube hyperCube, int lemmingId)
     {
         var spawnPosition = hyperCube.transform.position + Vector3.up * _yOffset;
-        var rotation = Quaternion.Euler(new Vector3(0, 90, 0));
+        var degrees = 90;
 
-        SpawnAndInitGameObject(hyperCube, lemmingPrefab, spawnPosition + hyperCube.transform.right / 2, rotation);
+        SpawnAndInitGameObject(hyperCube, lemmingId, spawnPosition + hyperCube.transform.right / 2, degrees);
 
-        rotation = Quaternion.Euler(new Vector3(0, -90, 0));
-        SpawnAndInitGameObject(hyperCube, lemmingPrefab, spawnPosition - hyperCube.transform.right / 2, rotation);
+        degrees = -90;
+        SpawnAndInitGameObject(hyperCube, lemmingId, spawnPosition - hyperCube.transform.right / 2, degrees);
 
         spawnPosition += hyperCube.transform.forward / 2;
-        rotation = Quaternion.Euler(new Vector3(0, 0, 0));
-        SpawnAndInitGameObject(hyperCube, lemmingPrefab, spawnPosition, rotation);
+        degrees = 0;
+        SpawnAndInitGameObject(hyperCube, lemmingId, spawnPosition, degrees);
     }
 
-    private void XSplit(HyperCube hyperCube, GameObject lemmingPrefab)
+    private void XSplit(HyperCube hyperCube, int lemmingId)
     {
         var spawnPosition = hyperCube.transform.position + Vector3.up * _yOffset + hyperCube.transform.forward / 2;
-        var rotation = Quaternion.Euler(new Vector3(0, 45, 0));
+        var degrees = 45;
+        SpawnAndInitGameObject(hyperCube, lemmingId, spawnPosition + hyperCube.transform.right / 2, degrees);
 
-        SpawnAndInitGameObject(hyperCube, lemmingPrefab, spawnPosition + hyperCube.transform.right / 2, rotation);
-
-        rotation = Quaternion.Euler(new Vector3(0, -45, 0));
-        SpawnAndInitGameObject(hyperCube, lemmingPrefab, spawnPosition - hyperCube.transform.right / 2, rotation);
+        degrees = -45;
+        SpawnAndInitGameObject(hyperCube, lemmingId, spawnPosition - hyperCube.transform.right / 2, degrees);
 
         spawnPosition = hyperCube.transform.position + Vector3.up * _yOffset - hyperCube.transform.forward / 2;
-        rotation = Quaternion.Euler(new Vector3(0, 135, 0));
+        degrees = 135;
+        SpawnAndInitGameObject(hyperCube, lemmingId, spawnPosition + hyperCube.transform.right / 2, degrees);
 
-        SpawnAndInitGameObject(hyperCube, lemmingPrefab, spawnPosition + hyperCube.transform.right / 2, rotation);
-
-        rotation = Quaternion.Euler(new Vector3(0, -135, 0));
-        SpawnAndInitGameObject(hyperCube, lemmingPrefab, spawnPosition - hyperCube.transform.right / 2, rotation);
+        degrees = -135;
+        SpawnAndInitGameObject(hyperCube, lemmingId, spawnPosition - hyperCube.transform.right / 2, degrees);
     }
 
-    private void YSplit(HyperCube hyperCube, GameObject lemmingPrefab)
+    private void VSplit(HyperCube hyperCube, int lemmingId)
     {
         var spawnPosition = hyperCube.transform.position + Vector3.up * _yOffset + hyperCube.transform.forward / 2;
-        var rotation = Quaternion.Euler(new Vector3(0, 45, 0));
+        var eulerAngles = 45;
 
-        SpawnAndInitGameObject(hyperCube, lemmingPrefab, spawnPosition + hyperCube.transform.right / 2, rotation);
+        SpawnAndInitGameObject(hyperCube, lemmingId, spawnPosition + hyperCube.transform.right / 2, eulerAngles);
 
-        rotation = Quaternion.Euler(new Vector3(0, -45, 0));
-        SpawnAndInitGameObject(hyperCube, lemmingPrefab, spawnPosition - hyperCube.transform.right / 2, rotation);
+        eulerAngles = -45;
+        SpawnAndInitGameObject(hyperCube, lemmingId, spawnPosition - hyperCube.transform.right / 2, eulerAngles);
     }
 
-    private static void SpawnAndInitGameObject(HyperCube hyperCube, GameObject cachedPrefab, Vector3 spawnPosition, Quaternion rotation)
+    private static void SpawnAndInitGameObject(HyperCube hyperCube, int lemmingId, Vector3 spawnPosition, float degrees)
     {
-        var cache = Instantiate(cachedPrefab, spawnPosition, rotation);
-        cache.GetComponent<Lemming>().SetLastUsedGameObject(hyperCube.gameObject);
+        // Dependency hiding might be bad later on. If this becomes a real problem we will need to think of another way to solve this.
+        var instancedLemming = LemmingFactory.Instance.CreateLemming(lemmingId, spawnPosition);
+
+        instancedLemming.SetRotationOnY(degrees);
+        instancedLemming.SetLastUsedGameObject(hyperCube.gameObject);
     }
 }

@@ -29,7 +29,7 @@ namespace HypercubesPrototyp.GameLogic.Utils
             _lemmingManager = LemmingManager.Instance;
         }
 
-        public Lemming CreateLemming(int id, Vector3 position)
+        public Lemming CreateLemming(int id, Vector3 position, Color color)
         {
             //Might want to think about object pooling
             Lemming instancedLemming = null;
@@ -41,9 +41,20 @@ namespace HypercubesPrototyp.GameLogic.Utils
             {
                 var instancedLemmingGO = Instantiate(_lemmingPrefabs[id], position, Quaternion.identity);
                 instancedLemmingGO.transform.parent = _lemmingParent;
+
                 instancedLemming = instancedLemmingGO.GetComponent<Lemming>();
+                instancedLemmingGO.transform.position += Vector3.up * instancedLemming.GetYOffset();
+                instancedLemming.SetColor(color);
+
                 _lemmingManager.AddLemming(instancedLemming);
             }
+            return instancedLemming;
+        }
+
+        public Lemming CreateLemming(int id, Vector3 position, float yRotationInDegrees, Color color)
+        {
+            Lemming instancedLemming = CreateLemming(id, position, color);
+            instancedLemming.SetRotationOnY(yRotationInDegrees);
             return instancedLemming;
         }
     }

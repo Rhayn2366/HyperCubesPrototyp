@@ -1,4 +1,5 @@
-﻿using HypercubesPrototyp.GameLogic.Utils;
+﻿using HypercubesPrototyp.GameLogic;
+using HypercubesPrototyp.GameLogic.Utils;
 using UnityEngine;
 
 namespace HypercubesPrototyp.HyperCubeLogic
@@ -7,15 +8,17 @@ namespace HypercubesPrototyp.HyperCubeLogic
     public class LemmingSpawnCube : CubeLogic
     {
         [SerializeField] private int _lemmingID;
-        [SerializeField] private float _yOffset = .25f;
+        [SerializeField] private Color _lemmingColor;
 
-        protected override void DoCommand(GameObject lemming, HyperCube hyperCube)
+        //TODO Get this from the lemming class as it can change depending on the lemming (Could be done in factory)
+
+#nullable enable
+        public override void DoCommand(Lemming? lemming, HyperCube hyperCube)
         {
-            var spawnPosition = hyperCube.transform.position + Vector3.up * _yOffset + hyperCube.transform.forward / 2;
-
+            var spawnPosition = hyperCube.transform.position + hyperCube.transform.forward / 2;
             //Dependency hiding bad!
-            var cache = LemmingFactory.Instance.CreateLemming(_lemmingID, spawnPosition);
-            cache.SetLastUsedGameObject(hyperCube.gameObject);
+            var cache = LemmingFactory.Instance.CreateLemming(_lemmingID, spawnPosition, _lemmingColor);
+            cache.SetLastUsedGameObjectAndInit(hyperCube.gameObject);
         }
     }
 }

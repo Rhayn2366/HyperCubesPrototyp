@@ -44,3 +44,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CubeLogic: {fileID: 11400000, guid: f38195a930167134cbd3e89031856621, type: 2}
+  _isUIStartTrigger: 1

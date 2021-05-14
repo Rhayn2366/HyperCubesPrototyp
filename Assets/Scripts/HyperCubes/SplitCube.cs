@@ -7,8 +7,7 @@ namespace HypercubesPrototyp.HyperCubeLogic
     [CreateAssetMenu(menuName = "CubeLogic/SplitCube")]
     public class SplitCube : CubeLogic
     {
-        //maybe get the offset from the prefab, could be done in the factory
-        [SerializeField] private float _yOffset = .25f;
+        //TODO Get this from the lemming class as it can change depending on the lemming (Could be done in factory)
         [SerializeField] private SplitType _splitType;
 
         private enum SplitType
@@ -18,79 +17,79 @@ namespace HypercubesPrototyp.HyperCubeLogic
             X
         }
 
-        protected override void DoCommand(GameObject lemming, HyperCube hyperCube)
+        public override void DoCommand(Lemming lemming, HyperCube hyperCube)
         {
             if (!lemming) return;
 
-            var cache = lemming.GetComponent<Lemming>();
-            var lemmingId = cache.GetLemmingId();
+            var lemmingId = lemming.GetLemmingId();
+            var lemmingColor = lemming.GetLemmingColor();
 
-            Destroy(lemming);
+            //Destroying it here doesn't make much sense. Maybe do it in the factory?
+            Destroy(lemming.gameObject);
 
             if (_splitType == SplitType.T)
             {
-                TSplit(hyperCube, lemmingId);
+                TSplit(hyperCube, lemmingId, lemmingColor);
             }
             else if (_splitType == SplitType.V)
             {
-                VSplit(hyperCube, lemmingId);
+                VSplit(hyperCube, lemmingId, lemmingColor);
             }
             else if (_splitType == SplitType.X)
             {
-                XSplit(hyperCube, lemmingId);
+                XSplit(hyperCube, lemmingId, lemmingColor);
             }
         }
 
-        private void TSplit(HyperCube hyperCube, int lemmingId)
+        private void TSplit(HyperCube hyperCube, int lemmingId, Color lemmingColor)
         {
-            var spawnPosition = hyperCube.transform.position + Vector3.up * _yOffset;
+            var spawnPosition = hyperCube.transform.position;
             var degrees = 90;
 
-            SpawnAndInitGameObject(hyperCube, lemmingId, spawnPosition + hyperCube.transform.right / 2, degrees);
+            SpawnAndInitGameObject(hyperCube, lemmingId, spawnPosition + hyperCube.transform.right / 2, degrees, lemmingColor);
 
             degrees = -90;
-            SpawnAndInitGameObject(hyperCube, lemmingId, spawnPosition - hyperCube.transform.right / 2, degrees);
+            SpawnAndInitGameObject(hyperCube, lemmingId, spawnPosition - hyperCube.transform.right / 2, degrees, lemmingColor);
 
             spawnPosition += hyperCube.transform.forward / 2;
             degrees = 0;
-            SpawnAndInitGameObject(hyperCube, lemmingId, spawnPosition, degrees);
+            SpawnAndInitGameObject(hyperCube, lemmingId, spawnPosition, degrees, lemmingColor);
         }
 
-        private void XSplit(HyperCube hyperCube, int lemmingId)
+        private void XSplit(HyperCube hyperCube, int lemmingId, Color lemmingColor)
         {
-            var spawnPosition = hyperCube.transform.position + Vector3.up * _yOffset + hyperCube.transform.forward / 2;
+            var spawnPosition = hyperCube.transform.position + hyperCube.transform.forward / 2;
             var degrees = 45;
-            SpawnAndInitGameObject(hyperCube, lemmingId, spawnPosition + hyperCube.transform.right / 2, degrees);
+            SpawnAndInitGameObject(hyperCube, lemmingId, spawnPosition + hyperCube.transform.right / 2, degrees, lemmingColor);
 
             degrees = -45;
-            SpawnAndInitGameObject(hyperCube, lemmingId, spawnPosition - hyperCube.transform.right / 2, degrees);
+            SpawnAndInitGameObject(hyperCube, lemmingId, spawnPosition - hyperCube.transform.right / 2, degrees, lemmingColor);
 
-            spawnPosition = hyperCube.transform.position + Vector3.up * _yOffset - hyperCube.transform.forward / 2;
+            spawnPosition = hyperCube.transform.position - hyperCube.transform.forward / 2;
             degrees = 135;
-            SpawnAndInitGameObject(hyperCube, lemmingId, spawnPosition + hyperCube.transform.right / 2, degrees);
+            SpawnAndInitGameObject(hyperCube, lemmingId, spawnPosition + hyperCube.transform.right / 2, degrees, lemmingColor);
 
             degrees = -135;
-            SpawnAndInitGameObject(hyperCube, lemmingId, spawnPosition - hyperCube.transform.right / 2, degrees);
+            SpawnAndInitGameObject(hyperCube, lemmingId, spawnPosition - hyperCube.transform.right / 2, degrees, lemmingColor);
         }
 
-        private void VSplit(HyperCube hyperCube, int lemmingId)
+        private void VSplit(HyperCube hyperCube, int lemmingId, Color lemmingColor)
         {
-            var spawnPosition = hyperCube.transform.position + Vector3.up * _yOffset + hyperCube.transform.forward / 2;
+            var spawnPosition = hyperCube.transform.position + hyperCube.transform.forward / 2;
             var eulerAngles = 45;
 
-            SpawnAndInitGameObject(hyperCube, lemmingId, spawnPosition + hyperCube.transform.right / 2, eulerAngles);
+            SpawnAndInitGameObject(hyperCube, lemmingId, spawnPosition + hyperCube.transform.right / 2, eulerAngles, lemmingColor);
 
             eulerAngles = -45;
-            SpawnAndInitGameObject(hyperCube, lemmingId, spawnPosition - hyperCube.transform.right / 2, eulerAngles);
+            SpawnAndInitGameObject(hyperCube, lemmingId, spawnPosition - hyperCube.transform.right / 2, eulerAngles, lemmingColor);
         }
 
-        private static void SpawnAndInitGameObject(HyperCube hyperCube, int lemmingId, Vector3 spawnPosition, float degrees)
+        private static void SpawnAndInitGameObject(HyperCube hyperCube, int lemmingId, Vector3 spawnPosition, float degrees, Color color)
         {
             // Dependency hiding might be bad later on. If this becomes a real problem we will need to think of another way to solve this.
-            var instancedLemming = LemmingFactory.Instance.CreateLemming(lemmingId, spawnPosition);
+            var instancedLemming = LemmingFactory.Instance.CreateLemming(lemmingId, spawnPosition, degrees, color);
 
-            instancedLemming.SetRotationOnY(degrees);
-            instancedLemming.SetLastUsedGameObject(hyperCube.gameObject);
+            instancedLemming.SetLastUsedGameObjectAndInit(hyperCube.gameObject);
         }
     }
 }

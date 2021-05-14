@@ -1,13 +1,14 @@
-﻿using UnityEngine;
+﻿using HypercubesPrototyp.GameLogic;
+using UnityEngine;
 
 namespace HypercubesPrototyp.HyperCubeLogic
 {
     [RequireComponent(typeof(Collider))]
     public class CollisionHyperCube : HyperCube
     {
-        public void OnCollisionDetected(GameObject collidedObject)
+        public void OnCollisionDetected(Lemming lemming)
         {
-            StartCoroutine(CubeLogic.TriggerCommand(collidedObject, this));
+            CubeLogic.DoCommand(lemming, this);
         }
     }
 }

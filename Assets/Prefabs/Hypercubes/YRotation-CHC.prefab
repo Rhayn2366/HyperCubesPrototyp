@@ -184,6 +184,7 @@ GameObject:
   - component: {fileID: 6694242797423567529}
   - component: {fileID: 6694242797423567530}
   - component: {fileID: 7088054376792308737}
+  - component: {fileID: 8421574022325919061}
   m_Layer: 7
   m_Name: YRotation-CHC
   m_TagString: Untagged
@@ -281,4 +282,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94572066117bb154391c133ef588c59c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CubeLogic: {fileID: 11400000, guid: 33e8f3f0398624f43a035e45a9e8d422, type: 2}
+  CubeLogic: {fileID: 0}
+--- !u!114 &8421574022325919061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6694242797423567531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49ad6102da20d624cae2ef3904e0e8a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rotationAngle: -90

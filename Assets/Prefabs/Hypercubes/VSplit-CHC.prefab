@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3955282362036548384}
   - component: {fileID: 4649709413865858638}
   - component: {fileID: 4649709413865858639}
+  - component: {fileID: 6298164013821388021}
   m_Layer: 7
   m_Name: VSplit-CHC
   m_TagString: Untagged
@@ -60,7 +61,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94572066117bb154391c133ef588c59c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CubeLogic: {fileID: 11400000, guid: dc5247af13d9ee54abb88aeda56432c8, type: 2}
+  CubeLogic: {fileID: 0}
 --- !u!33 &4649709413865858638
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -111,6 +112,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &6298164013821388021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 601395372550778250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b686d8656c7df4b47ab6c74298542448, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _splitType: 1
 --- !u!1 &4649709413350320045
 GameObject:
   m_ObjectHideFlags: 0

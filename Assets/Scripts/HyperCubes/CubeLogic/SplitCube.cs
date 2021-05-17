@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace HypercubesPrototyp.HyperCubeLogic
 {
-    public class SplitCube : MonobehaviourCubeLogic
+    public class SplitCube : CubeLogic
     {
         [SerializeField] private SplitType _splitType;
 

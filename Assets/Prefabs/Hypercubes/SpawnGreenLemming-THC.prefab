@@ -185,6 +185,7 @@ GameObject:
   - component: {fileID: 7861541818575278595}
   - component: {fileID: 5707776704747956739}
   - component: {fileID: 5707776704747956738}
+  - component: {fileID: 7022185753270883736}
   m_Layer: 7
   m_Name: SpawnGreenLemming-THC
   m_TagString: Untagged
@@ -219,7 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5fb55e184008b14cac890be0ef1fe37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CubeLogic: {fileID: 11400000, guid: 95e94adba40da9d4b862df48d1814490, type: 2}
+  CubeLogic: {fileID: 0}
   _isUIStartTrigger: 1
 --- !u!23 &5707776704747956739
 MeshRenderer:
@@ -271,3 +272,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6944108671939173176}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &7022185753270883736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6944108671939173176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476a05d64438ec140b8dd97a64504307, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _lemmingID: 0
+  _lemmingColor: {r: 0.04460168, g: 1, b: 0, a: 1}

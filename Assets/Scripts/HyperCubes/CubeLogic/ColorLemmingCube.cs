@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace HypercubesPrototyp.HyperCubeLogic
 {
-    public class ColorLemmingCube : MonobehaviourCubeLogic
+    public class ColorLemmingCube : CubeLogic
     {
         [SerializeField] private Color _color = Color.red;
 

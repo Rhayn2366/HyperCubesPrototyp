@@ -186,6 +186,7 @@ GameObject:
   - component: {fileID: 218007694374483689}
   - component: {fileID: 4448973047717931074}
   - component: {fileID: 4448973047717931073}
+  - component: {fileID: 5755061601196933306}
   m_Layer: 7
   m_Name: XSplit-CHC
   m_TagString: Untagged
@@ -233,7 +234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94572066117bb154391c133ef588c59c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CubeLogic: {fileID: 11400000, guid: 775be1dd2078e4145b6688c89dc43b1f, type: 2}
+  CubeLogic: {fileID: 0}
 --- !u!33 &4448973047717931074
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -284,3 +285,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &5755061601196933306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4448973047717931075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b686d8656c7df4b47ab6c74298542448, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _splitType: 2

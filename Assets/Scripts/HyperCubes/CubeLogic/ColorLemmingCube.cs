@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace HypercubesPrototyp.HyperCubeLogic
 {
-    [CreateAssetMenu(menuName = "CubeLogic/ColorLemmingCube")]
     public class ColorLemmingCube : CubeLogic
     {
         [SerializeField] private Color _color = Color.red;

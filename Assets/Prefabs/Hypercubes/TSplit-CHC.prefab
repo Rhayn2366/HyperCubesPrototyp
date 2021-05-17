@@ -186,6 +186,7 @@ GameObject:
   - component: {fileID: 8191123028285560909}
   - component: {fileID: 5699269334153955040}
   - component: {fileID: 5699269334153955041}
+  - component: {fileID: 6660096252948445489}
   m_Layer: 7
   m_Name: TSplit-CHC
   m_TagString: Untagged
@@ -233,7 +234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94572066117bb154391c133ef588c59c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CubeLogic: {fileID: 11400000, guid: bf4f39bcb2581194db10e526348d0a9c, type: 2}
+  CubeLogic: {fileID: 0}
 --- !u!23 &5699269334153955040
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -284,3 +285,16 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5699269334153955047}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &6660096252948445489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5699269334153955047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b686d8656c7df4b47ab6c74298542448, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _splitType: 0

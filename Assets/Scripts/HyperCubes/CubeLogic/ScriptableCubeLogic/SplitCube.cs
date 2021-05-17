@@ -4,8 +4,7 @@ using UnityEngine;
 
 namespace HypercubesPrototyp.HyperCubeLogic
 {
-    [CreateAssetMenu(menuName = "CubeLogic/SplitCube")]
-    public class SplitCube : CubeLogic
+    public class SplitCube : MonobehaviourCubeLogic
     {
         [SerializeField] private SplitType _splitType;
 

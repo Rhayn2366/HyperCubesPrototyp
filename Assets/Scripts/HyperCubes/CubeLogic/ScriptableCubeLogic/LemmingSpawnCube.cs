@@ -4,8 +4,7 @@ using UnityEngine;
 
 namespace HypercubesPrototyp.HyperCubeLogic
 {
-    [CreateAssetMenu(menuName = "CubeLogic/SpawnCube")]
-    public class LemmingSpawnCube : CubeLogic
+    public class LemmingSpawnCube : MonobehaviourCubeLogic
     {
         [SerializeField] private int _lemmingID;
         [SerializeField] private Color _lemmingColor;

@@ -3,8 +3,7 @@ using UnityEngine;
 
 namespace HypercubesPrototyp.HyperCubeLogic
 {
-    [CreateAssetMenu(menuName = "CubeLogic/YRotationCube")]
-    public class YRotationCube : CubeLogic
+    public class YRotationCube : MonobehaviourCubeLogic
     {
         [SerializeField] private float _rotationAngle = 45f;
 

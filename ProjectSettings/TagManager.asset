@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Lemming
+  - TriggerHyperCube
   layers:
   - Default
   - TransparentFX

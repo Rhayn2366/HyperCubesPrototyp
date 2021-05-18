@@ -42,50 +42,50 @@ namespace HypercubesPrototyp.HyperCubeLogic
         private void TSplit(HyperCube hyperCube, int lemmingId, Color lemmingColor)
         {
             var spawnPosition = hyperCube.transform.position;
-            var degrees = 90;
+            var degrees = hyperCube.transform.eulerAngles.y + 90;
 
             SpawnAndInitGameObject(hyperCube, lemmingId, spawnPosition + hyperCube.transform.right / 2, degrees, lemmingColor);
 
-            degrees = -90;
+            degrees = hyperCube.transform.eulerAngles.y - 90;
             SpawnAndInitGameObject(hyperCube, lemmingId, spawnPosition - hyperCube.transform.right / 2, degrees, lemmingColor);
 
             spawnPosition += hyperCube.transform.forward / 2;
-            degrees = 0;
+            degrees = hyperCube.transform.eulerAngles.y;
             SpawnAndInitGameObject(hyperCube, lemmingId, spawnPosition, degrees, lemmingColor);
         }
 
         private void XSplit(HyperCube hyperCube, int lemmingId, Color lemmingColor)
         {
             var spawnPosition = hyperCube.transform.position + hyperCube.transform.forward / 2;
-            var degrees = 45;
+            var degrees = hyperCube.transform.eulerAngles.y + 45;
             SpawnAndInitGameObject(hyperCube, lemmingId, spawnPosition + hyperCube.transform.right / 2, degrees, lemmingColor);
 
-            degrees = -45;
+            degrees = hyperCube.transform.eulerAngles.y - 45;
             SpawnAndInitGameObject(hyperCube, lemmingId, spawnPosition - hyperCube.transform.right / 2, degrees, lemmingColor);
 
             spawnPosition = hyperCube.transform.position - hyperCube.transform.forward / 2;
-            degrees = 135;
+            degrees = hyperCube.transform.eulerAngles.y + 135;
             SpawnAndInitGameObject(hyperCube, lemmingId, spawnPosition + hyperCube.transform.right / 2, degrees, lemmingColor);
 
-            degrees = -135;
+            degrees = hyperCube.transform.eulerAngles.y - 135;
             SpawnAndInitGameObject(hyperCube, lemmingId, spawnPosition - hyperCube.transform.right / 2, degrees, lemmingColor);
         }
 
         private void VSplit(HyperCube hyperCube, int lemmingId, Color lemmingColor)
         {
             var spawnPosition = hyperCube.transform.position + hyperCube.transform.forward / 2;
-            var eulerAngles = 45;
+            var eulerAngles = hyperCube.transform.eulerAngles.y + 45;
 
             SpawnAndInitGameObject(hyperCube, lemmingId, spawnPosition + hyperCube.transform.right / 2, eulerAngles, lemmingColor);
 
-            eulerAngles = -45;
+            eulerAngles = hyperCube.transform.eulerAngles.y - 45;
             SpawnAndInitGameObject(hyperCube, lemmingId, spawnPosition - hyperCube.transform.right / 2, eulerAngles, lemmingColor);
         }
 
         private static void SpawnAndInitGameObject(HyperCube hyperCube, int lemmingId, Vector3 spawnPosition, float degrees, Color color)
         {
             // Dependency hiding might be bad later on. If this becomes a real problem we will need to think of another way to solve this.
-            var instancedLemming = LemmingFactory.Instance.CreateLemming(lemmingId, spawnPosition, degrees, color);
+            var instancedLemming = LemmingFactory.Instance.CreateLemming(lemmingId, spawnPosition, color, degrees);
 
             instancedLemming.SetLastUsedGameObjectAndInit(hyperCube.gameObject);
         }

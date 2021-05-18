@@ -14,7 +14,7 @@ namespace HypercubesPrototyp.HyperCubeLogic
         {
             var spawnPosition = hyperCube.transform.position + hyperCube.transform.forward / 2;
             //Dependency hiding bad!
-            var cache = LemmingFactory.Instance.CreateLemming(_lemmingID, spawnPosition, _lemmingColor);
+            var cache = LemmingFactory.Instance.CreateLemming(_lemmingID, spawnPosition, _lemmingColor, hyperCube.transform.eulerAngles.y);
             cache.SetLastUsedGameObjectAndInit(hyperCube.gameObject);
         }
     }

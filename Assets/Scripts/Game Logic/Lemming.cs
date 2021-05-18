@@ -39,9 +39,14 @@ namespace HypercubesPrototyp.GameLogic
             return _lemmingColor;
         }
 
-        public void SetRotationOnY(float degrees)
+        public void AddRotationOnY(float degrees)
         {
             transform.Rotate(Vector3.up, degrees);
+        }
+
+        public void SetRotationOnY(float degrees)
+        {
+            transform.rotation = Quaternion.Euler(0, degrees, 0);
         }
 
         public void Move()

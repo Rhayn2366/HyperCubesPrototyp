@@ -51,7 +51,7 @@ namespace HypercubesPrototyp.GameLogic.Utils
             return instancedLemming;
         }
 
-        public Lemming CreateLemming(int id, Vector3 position, float yRotationInDegrees, Color color)
+        public Lemming CreateLemming(int id, Vector3 position, Color color, float yRotationInDegrees)
         {
             Lemming instancedLemming = CreateLemming(id, position, color);
             instancedLemming.SetRotationOnY(yRotationInDegrees);

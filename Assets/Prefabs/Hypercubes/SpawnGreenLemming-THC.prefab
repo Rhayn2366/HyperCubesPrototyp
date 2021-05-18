@@ -186,9 +186,10 @@ GameObject:
   - component: {fileID: 5707776704747956739}
   - component: {fileID: 5707776704747956738}
   - component: {fileID: 7022185753270883736}
+  - component: {fileID: 1680104163203622481}
   m_Layer: 7
   m_Name: SpawnGreenLemming-THC
-  m_TagString: Untagged
+  m_TagString: TriggerHyperCube
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -200,7 +201,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6944108671939173176}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.7, y: 0, z: -0.29}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -221,7 +222,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CubeLogic: {fileID: 0}
-  _isUIStartTrigger: 1
+  _isUIStartTrigger: 0
 --- !u!23 &5707776704747956739
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -286,3 +287,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _lemmingID: 0
   _lemmingColor: {r: 0.04460168, g: 1, b: 0, a: 1}
+--- !u!65 &1680104163203622481
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6944108671939173176}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.5, z: 0}

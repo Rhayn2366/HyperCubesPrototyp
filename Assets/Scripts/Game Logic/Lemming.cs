@@ -16,10 +16,14 @@ namespace HypercubesPrototyp.GameLogic
         [SerializeField] private float _yOffset = .25f;
         [SerializeField] private Renderer _renderer;
 
+        [SerializeField] private LemmingTimeToLiveDisplay _lemmingTTLDisplay;
+
         private GameObject _lastUsedGameObject;
         private bool _isInit;
+        private float _timeToLive = 0f;
+
         private LemmingManager _lemmingManager;
-        
+
         public int GetLemmingId()
         {
             return _lemmingId;
@@ -60,6 +64,27 @@ namespace HypercubesPrototyp.GameLogic
             return _yOffset;
         }
 
+        public void AddTimeToLive(float value)
+        {
+            _timeToLive += value;
+            UpdateTTL();
+        }
+
+        public void SubtractTimeToLive(float value)
+        {
+            _timeToLive -= value;
+
+            if (_timeToLive <= 0)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            UpdateTTL();
+        }
+
+        public float GetTimeToLive() => _timeToLive;
+
         /// <summary>
         /// Sets the last game object this lemming interacted with, to avoid a second call on it.
         /// Also initializes the lemming, to let it move and interact with others.
@@ -75,10 +100,16 @@ namespace HypercubesPrototyp.GameLogic
             //Maybe start a coroutine here to make it possible to use the same collider after x seconds again.
         }
 
+        private void UpdateTTL()
+        {
+            _lemmingTTLDisplay.UpdateTTL(_timeToLive);
+        }
+
         #region Unity Callbacks
         private void OnEnable()
         {
             _lemmingManager = LemmingManager.Instance;
+            UpdateTTL();
         }
 
         private void OnTriggerEnter(Collider collider)

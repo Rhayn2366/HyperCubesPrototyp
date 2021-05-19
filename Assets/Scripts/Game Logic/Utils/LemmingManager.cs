@@ -42,9 +42,12 @@ namespace HypercubesPrototyp.GameLogic.Utils
 
         private void FixedUpdate()
         {
-            foreach (var lemming in _activeLemmings)
+            var cachedDeltaTime = Time.deltaTime;
+
+            foreach (Lemming lemming in _activeLemmings)
             {
                 lemming.Move();
+                lemming.SubtractTimeToLive(cachedDeltaTime);
             }
         }
     }

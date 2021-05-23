@@ -1,6 +1,8 @@
 using UnityEngine;
 
-
+/// <summary>
+/// Toggles the image of a toggle when its state changed
+/// </summary>
 public class ImageToggle : CustomToggle
 {
     [SerializeField] private Sprite _activeSprite;

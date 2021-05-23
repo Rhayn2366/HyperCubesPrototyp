@@ -1,5 +1,11 @@
 using UnityEngine;
 
+/// <summary>
+/// Simple camera controller for testing purpose.
+/// 
+/// Enables moving in each direction, rotation, zooming, resetting and faster movement.
+/// Input keys can be customized through the inspector.
+/// </summary>
 public class CameraController : MonoBehaviour
 {
     [SerializeField] private Transform _cameraTransform;
@@ -42,24 +48,6 @@ public class CameraController : MonoBehaviour
     private Vector3 _position;
     private Quaternion _rotation;
     private Vector3 _zoom;
-
-    private void Start()
-    {
-        _startPoint = transform.position;
-        _startRotation = transform.rotation;
-        _startLocalCameraPosition = _cameraTransform.localPosition;
-    }
-
-    private void Update()
-    {
-        SetCameraValues();
-
-        UserInput();
-
-        ClampValues();
-
-        UpdateCameraValues();
-    }
 
     private void SetCameraValues()
     {
@@ -109,6 +97,17 @@ public class CameraController : MonoBehaviour
             _movementSpeed = _normalSpeed;
         }
     }
+    
+    /// <summary>
+    /// Allows for movement in the directions north, east, south and west 
+    /// when the user presses the specified buttons.
+    /// 
+    /// Multiple inputs are allowed but will cancel each other if they are
+    /// the opposites.
+    /// 
+    /// Movement will be in local space, so the movement will depend on the
+    /// transforms rotation
+    /// </summary>
     private void Move()
     {
         if (Input.GetKey(_forward))
@@ -128,6 +127,11 @@ public class CameraController : MonoBehaviour
             _position += transform.right * _movementSpeed;
         }
     }
+    
+    /// <summary>
+    /// Allows for the rotation on the y-axis when the mouse will be dragged while
+    /// holding down the right mouse button.
+    /// </summary>
     private void RotateYAxis()
     {
         if (Input.GetMouseButtonDown(2))
@@ -145,6 +149,10 @@ public class CameraController : MonoBehaviour
             _rotation *= Quaternion.Euler(Vector3.up * (-difference.x * _mouseRotationSensivity / _rotationAmount));
         }
     }
+    
+    /// <summary>
+    /// Allows for a camera zoom with the mouses scroll wheel
+    /// </summary>
     private void Zoom()
     {
         if (Input.mouseScrollDelta.y != 0)
@@ -152,6 +160,13 @@ public class CameraController : MonoBehaviour
             _zoom += Input.mouseScrollDelta.y * _zoomAmount * _mouseZoomSensivity;
         }
     }
+    
+    /// <summary>
+    /// Invokes a camera reset to its starting values when the button is pressed.
+    /// 
+    /// This action will not be immediate and can possibly take multiple frames 
+    /// for a smooth transition.
+    /// </summary>
     private void SetOriginalCamera()
     {
         if (Input.GetKeyDown(_resetCamera))
@@ -174,4 +189,24 @@ public class CameraController : MonoBehaviour
         transform.rotation = Quaternion.Lerp(transform.rotation, _rotation, Time.unscaledDeltaTime * _movementTime);
         _cameraTransform.localPosition = Vector3.Lerp(_cameraTransform.localPosition, _zoom, Time.unscaledDeltaTime * _movementTime);
     }
+
+    #region Unity_callbacks
+    private void Start()
+    {
+        _startPoint = transform.position;
+        _startRotation = transform.rotation;
+        _startLocalCameraPosition = _cameraTransform.localPosition;
+    }
+
+    private void Update()
+    {
+        SetCameraValues();
+
+        UserInput();
+
+        ClampValues();
+
+        UpdateCameraValues();
+    }
+    #endregion
 }

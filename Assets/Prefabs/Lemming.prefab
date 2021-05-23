@@ -299,6 +299,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeToLiveLabel: {fileID: 193562715997602815}
+  _lemming: {fileID: 4140010266275957115}
 --- !u!1 &2221353622519534155
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
 
+
+/// <summary>
+/// Toggles the color of a toggle when its state changed
+/// </summary>
 public class ColorToggle : CustomToggle
 {
     [SerializeField] private Color32 _activeColor;

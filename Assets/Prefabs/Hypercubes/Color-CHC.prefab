@@ -232,7 +232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94572066117bb154391c133ef588c59c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CubeLogic: {fileID: 1672971567713240433}
+  CubeLogic: {fileID: 0}
 --- !u!33 &7583483237771708744
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -295,4 +295,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 980d7ff23d24dda4890d83c8972665d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 1, g: 0.49574798, b: 0, a: 1}
+  _color: 2

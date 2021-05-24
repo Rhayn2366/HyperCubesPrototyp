@@ -18,6 +18,8 @@ namespace HypercubesPrototyp.GameLogic.Utils
     {
         public static LemmingManager Instance;
 
+        [SerializeField] private List<Color> _colors = new List<Color>();
+
         private readonly List<Lemming> _activeLemmings = new List<Lemming>();
 
         /// <summary>
@@ -50,6 +52,13 @@ namespace HypercubesPrototyp.GameLogic.Utils
                 Lemming lemming = _activeLemmings[i];
                 Destroy(lemming.gameObject);
             }
+        }
+
+        public Color GetColor(LemmingColor lemmingColor)
+        {
+            if (_colors.Count > (int)lemmingColor)
+                return _colors[(int)lemmingColor];
+            else return _colors[0];
         }
 
         #region Unity_callbacks

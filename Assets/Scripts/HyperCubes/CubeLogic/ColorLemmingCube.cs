@@ -5,7 +5,7 @@ namespace HypercubesPrototyp.HyperCubeLogic
 {
     public class ColorLemmingCube : CubeLogic
     {
-        [SerializeField] private Color _color = Color.red;
+        [SerializeField] private LemmingColor _color = LemmingColor.Red;
 
         public override void DoCommand(Lemming lemming, HyperCube hyperCube)
         {

@@ -31,7 +31,7 @@ namespace HypercubesPrototyp.GameLogic.Utils
         /// <param name="id"> position in prefab list </param>
         /// <param name="position"> position in unity world space </param>
         /// <returns> newly created lemming </returns>
-        private Lemming CreateLemming(int id, Vector3 position)
+        private Lemming CreateLemming(LemmingModel id, Vector3 position)
         {
             //Might want to think about object pooling
             Lemming instancedLemming = null;
@@ -39,9 +39,9 @@ namespace HypercubesPrototyp.GameLogic.Utils
             {
                 throw new ArgumentOutOfRangeException("CRITICAL ERROR: the prefab list is not initialized!");
             }
-            else if (_lemmingPrefabs.Count > id)
+            else if (_lemmingPrefabs.Count > (int) id)
             {
-                var instancedLemmingGO = Instantiate(_lemmingPrefabs[id], position, Quaternion.identity);
+                var instancedLemmingGO = Instantiate(_lemmingPrefabs[(int) id], position, Quaternion.identity);
                 instancedLemmingGO.transform.parent = _lemmingParent;
 
                 instancedLemming = instancedLemmingGO.GetComponent<Lemming>();
@@ -66,7 +66,7 @@ namespace HypercubesPrototyp.GameLogic.Utils
         /// <param name="color"> specified color for the lemming </param>
         /// <param name="timeToLive"> specified time to live for the lemming </param>
         /// <returns> newly created lemming </returns>
-        public Lemming CreateLemming(int id, Vector3 position, Color color, float timeToLive)
+        public Lemming CreateLemming(LemmingModel id, Vector3 position, LemmingColor color, float timeToLive)
         {
             Lemming instancedLemming = CreateLemming(id, position);
             instancedLemming.SetColor(color);
@@ -83,7 +83,7 @@ namespace HypercubesPrototyp.GameLogic.Utils
         /// <param name="timeToLive"> specified time to live for the lemming </param>
         /// <param name="yRotationInDegrees"> specified rotation on the y axis in degrees for the lemming </param>
         /// <returns> newly created lemming </returns>
-        public Lemming CreateLemming(int id, Vector3 position, Color color, float timeToLive, float yRotationInDegrees)
+        public Lemming CreateLemming(LemmingModel id, Vector3 position, LemmingColor color, float timeToLive, float yRotationInDegrees)
         {
             Lemming instancedLemming = CreateLemming(id, position, color, timeToLive);
             instancedLemming.SetRotationOnY(yRotationInDegrees);

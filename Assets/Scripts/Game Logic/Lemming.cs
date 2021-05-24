@@ -1,6 +1,5 @@
 ﻿using HypercubesPrototyp.GameLogic.Utils;
 using HypercubesPrototyp.HyperCubeLogic;
-using System;
 using UnityEngine;
 
 namespace HypercubesPrototyp.GameLogic
@@ -11,8 +10,8 @@ namespace HypercubesPrototyp.GameLogic
     [RequireComponent(typeof(Collider), typeof(Rigidbody))]
     public class Lemming : MonoBehaviour
     {
-        [SerializeField] private int _lemmingId;
-        [SerializeField] private Color _lemmingColor;
+        [SerializeField] private LemmingModel _lemmingId;
+        [SerializeField] private LemmingColor _lemmingColor;
         [SerializeField] private float _yOffset = .25f;
         [SerializeField] private Renderer _renderer;
 
@@ -98,8 +97,6 @@ namespace HypercubesPrototyp.GameLogic
         {
             _lastUsedGameObject = gameObjectInteractedWith;
             _isInit = true;
-            enabled = true;
-            //Maybe start a coroutine here to make it possible to use the same collider after x seconds again.
         }
 
         /// <summary>
@@ -110,7 +107,7 @@ namespace HypercubesPrototyp.GameLogic
             _lemmingTTLDisplay.UpdateTTL();
         }
         #region Getter and setter
-        public int GetLemmingId()
+        public LemmingModel GetLemmingId()
         {
             return _lemmingId;
         }
@@ -122,17 +119,17 @@ namespace HypercubesPrototyp.GameLogic
 
         public float GetTimeToLive() => _timeToLive;
 
-        public Color GetLemmingColor()
+        public LemmingColor GetLemmingColor()
         {
             return _lemmingColor;
         }
 
-        public void SetColor(Color newColor)
+        public void SetColor(LemmingColor newColor)
         {
             _lemmingColor = newColor;
 
             MaterialPropertyBlock props = new MaterialPropertyBlock();
-            props.SetColor("_BaseColor", _lemmingColor);
+            props.SetColor("_BaseColor", _lemmingManager.GetColor(newColor));
             _renderer.SetPropertyBlock(props);
         }
         #endregion

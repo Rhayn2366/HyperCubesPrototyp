@@ -508,13 +508,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4140010266275957114}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d49cf5ebccf276a438b2cfc81ae5185e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _lemmingId: 0
-  _lemmingColor: {r: 0.9607843, g: 0.40392157, b: 0.40392157, a: 1}
+  _lemmingColor: 0
   _yOffset: 0.25
   _renderer: {fileID: 4140010266275957118}
   _lemmingTTLDisplay: {fileID: 6129587201447964397}

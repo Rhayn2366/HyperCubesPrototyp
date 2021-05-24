@@ -40,7 +40,7 @@ namespace HypercubesPrototyp.HyperCubeLogic
             }
         }
 
-        private void TSplit(HyperCube hyperCube, int lemmingId, Color lemmingColor, float timeToLive)
+        private void TSplit(HyperCube hyperCube, LemmingModel lemmingId, LemmingColor lemmingColor, float timeToLive)
         {
             var spawnPosition = hyperCube.transform.position;
             var degrees = hyperCube.transform.eulerAngles.y + 90;
@@ -55,7 +55,7 @@ namespace HypercubesPrototyp.HyperCubeLogic
             SpawnAndInitGameObject(hyperCube, lemmingId, spawnPosition, degrees, lemmingColor, timeToLive);
         }
 
-        private void XSplit(HyperCube hyperCube, int lemmingId, Color lemmingColor, float timeToLive)
+        private void XSplit(HyperCube hyperCube, LemmingModel lemmingId, LemmingColor lemmingColor, float timeToLive)
         {
             var spawnPosition = hyperCube.transform.position + hyperCube.transform.forward / 2;
             var degrees = hyperCube.transform.eulerAngles.y + 45;
@@ -72,7 +72,7 @@ namespace HypercubesPrototyp.HyperCubeLogic
             SpawnAndInitGameObject(hyperCube, lemmingId, spawnPosition - hyperCube.transform.right / 2, degrees, lemmingColor, timeToLive);
         }
 
-        private void VSplit(HyperCube hyperCube, int lemmingId, Color lemmingColor, float timeToLive)
+        private void VSplit(HyperCube hyperCube, LemmingModel lemmingId, LemmingColor lemmingColor, float timeToLive)
         {
             var spawnPosition = hyperCube.transform.position + hyperCube.transform.forward / 2;
             var eulerAngles = hyperCube.transform.eulerAngles.y + 45;
@@ -83,7 +83,7 @@ namespace HypercubesPrototyp.HyperCubeLogic
             SpawnAndInitGameObject(hyperCube, lemmingId, spawnPosition - hyperCube.transform.right / 2, eulerAngles, lemmingColor, timeToLive);
         }
 
-        private static void SpawnAndInitGameObject(HyperCube hyperCube, int lemmingId, Vector3 spawnPosition, float degrees, Color color, float timeToLive)
+        private static void SpawnAndInitGameObject(HyperCube hyperCube, LemmingModel lemmingId, Vector3 spawnPosition, float degrees, LemmingColor color, float timeToLive)
         {
             // Dependency hiding might be bad later on. If this becomes a real problem we will need to think of another way to solve this.
             var instancedLemming = LemmingFactory.Instance.CreateLemming(lemmingId, spawnPosition, color, timeToLive, degrees);

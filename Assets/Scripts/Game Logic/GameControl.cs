@@ -2,6 +2,7 @@ using HypercubesPrototyp.GameLogic.Utils;
 using HypercubesPrototyp.HyperCubeLogic;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace HypercubesPrototyp.GameLogic
 {
@@ -13,9 +14,16 @@ namespace HypercubesPrototyp.GameLogic
     /// </summary>
     public class GameControl : MonoBehaviour
     {
+        //TODO May need to refactor this later on. It has too many dependencies and functionalities for one class.
         public static GameControl Instance;
 
+        [SerializeField] private Toggle _startStopToggle;
+        [SerializeField] private GameObject _winPanel;
+
         private readonly List<TriggerLogicHyperCube> _triggerLogicHyperCubes = new List<TriggerLogicHyperCube>();
+        private readonly List<AbsorberCube> _absorberCubes = new List<AbsorberCube>();
+
+        private readonly List<GoalCube> _goalCubes = new List<GoalCube>();
 
         private LemmingManager _lemmingManager;
 
@@ -38,6 +46,57 @@ namespace HypercubesPrototyp.GameLogic
         }
 
         /// <summary>
+        /// Adds a goal, so it will be required to finish a level.
+        /// </summary>
+        /// <param name="goalCube"> goal that should be checked </param>
+        public void SubscribeGoal(GoalCube goalCube)
+        {
+            _goalCubes.Add(goalCube);
+        }
+
+        /// <summary>
+        /// Removes a goal, so it will no longer be required to finish the level.
+        /// </summary>
+        /// <param name="goalCube"> goal that will not be checked anymore </param>
+        public void UnsubscribeGoal(GoalCube goalCube)
+        {
+            _goalCubes.Remove(goalCube);
+        }
+
+        public void SubscribeAbsorber(AbsorberCube absorber)
+        {
+            _absorberCubes.Add(absorber);
+        }
+
+        public void UnsubscribeAbsorber(AbsorberCube absorber)
+        {
+            _absorberCubes.Remove(absorber);
+        }
+
+        /// <summary>
+        /// Called whenever a goal finished its task.
+        /// Checks if all goals are finished and will trigger a UI if it is.
+        /// </summary>
+        public void OnGoalTriggered()
+        {
+            bool isFinished = true;
+            foreach (var goal in _goalCubes)
+            {
+                if (!goal.IsFinished())
+                {
+                    isFinished = false;
+                }
+            }
+
+            if (isFinished)
+            {
+                _winPanel.SetActive(true);
+                _startStopToggle.isOn = false;
+                //_startStopToggle.onValueChanged.Invoke(false);
+            }
+        }
+
+        /// <summary>
         /// Toggles between playing and editing state.
         /// 
         /// Will invoke all subscribed hypercubes when it is
@@ -54,6 +113,7 @@ namespace HypercubesPrototyp.GameLogic
             else
             {
                 _lemmingManager.DeleteAllLemmings();
+                ResetAllGoals();
             }
         }
 
@@ -82,6 +142,14 @@ namespace HypercubesPrototyp.GameLogic
             foreach (var hyperCube in _triggerLogicHyperCubes)
             {
                 hyperCube.TriggerLogic();
+            }
+        }
+
+        private void ResetAllGoals()
+        {
+            foreach (var absorber in _absorberCubes)
+            {
+                absorber.ResetValues();
             }
         }
 

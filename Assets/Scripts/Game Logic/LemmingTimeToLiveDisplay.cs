@@ -29,7 +29,10 @@ namespace HypercubesPrototyp.GameLogic
         /// </summary>
         private void FaceCamera()
         {
-            transform.rotation = Quaternion.LookRotation(_cameraTransform.forward, _cameraTransform.up);
+            if (_cameraTransform)
+            {
+                transform.rotation = Quaternion.LookRotation(_cameraTransform.forward, _cameraTransform.up);
+            }
         }
 
         #region Unity_callbacks

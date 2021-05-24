@@ -286,7 +286,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lemmingID: 0
-  _lemmingColor: {r: 0.04460168, g: 1, b: 0, a: 1}
+  _lemmingColor: 3
+  _spawnCount: 1
+  _timeToLive: 20
 --- !u!65 &1680104163203622481
 BoxCollider:
   m_ObjectHideFlags: 0
